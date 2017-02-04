@@ -743,6 +743,7 @@ class Pillar(object):
         elif isinstance(val, list):
             if key == 'git':
                 ext = self.ext_pillars[key](self.minion_id,
+                                            pillar,
                                             val,
                                             pillar_dirs)
             else:
@@ -752,6 +753,7 @@ class Pillar(object):
         else:
             if key == 'git':
                 ext = self.ext_pillars[key](self.minion_id,
+                                            pillar,
                                             val,
                                             pillar_dirs)
             else:
