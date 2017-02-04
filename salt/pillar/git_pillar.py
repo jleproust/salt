@@ -365,7 +365,7 @@ def __virtual__():
     return False
 
 
-def ext_pillar(minion_id, repo, pillar_dirs):
+def ext_pillar(minion_id, prev_pillar, repo, pillar_dirs):
     '''
     Checkout the ext_pillar sources and compile the resulting pillar SLS
     '''
@@ -409,7 +409,7 @@ def ext_pillar(minion_id, repo, pillar_dirs):
                     or opts.get('git_pillar_base')
             opts['pillar_roots'] = {env: pillar_roots}
 
-            local_pillar = Pillar(opts, __grains__, minion_id, env)
+            local_pillar = Pillar(opts, __grains__, minion_id, env, pillar=prev_pillar)
             ret = salt.utils.dictupdate.merge(
                 ret,
                 local_pillar.compile_pillar(ext=False),
